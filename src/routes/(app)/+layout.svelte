@@ -4,11 +4,12 @@
 	import { goto } from '$app/navigation';
 	import AccountSwitcher from './AccountSwitcher.svelte';
 	import Copy from '$lib/Copy.svelte';
+	import Icon from '$lib/Icon.svelte';
 
 	const paths: App.Paths = [
-		{ href: '/', title: 'Home', disabled: false },
-		{ href: '/sessions', title: 'Sessions', disabled: true },
-		{ href: '/settings', title: 'Settings', disabled: false },
+		{ href: '/', title: 'Home', disabled: false, icon: 'home' },
+		{ href: '/sessions', title: 'Sessions', disabled: true, icon: 'gamepad' },
+		{ href: '/settings', title: 'Settings', disabled: false, icon: 'settings' },
 	];
 
 	function logout() {
@@ -29,11 +30,15 @@
 			<div class='top'>
 				<img id='logo' src='logo.png' alt='GUILD logo'>
 				<nav>
-					{#each paths as { href, title, disabled } (href)}
+					{#each paths as { href, title, disabled, icon } (href)}
 						{#if !disabled}
-							<div class='nav-item'><a {href}>{title}</a></div>
+							<div class='nav-item'>
+								<a {href}><span class='icon'><Icon {icon} /></span> {title}</a>
+							</div>
 						{:else}
-							<div class='nav-item disabled'><a href=''>{title}</a></div>
+							<div class='nav-item disabled'>
+								<a href=''><span class='icon'><Icon {icon} /></span> {title}</a>
+							</div>
 						{/if}
 					{/each}
 				</nav>
@@ -77,13 +82,16 @@
 
                     padding: 5px 0;
                     margin: 0;
+                    display: flex;
+                    flex-flow: row nowrap;
+                    align-items: center;
                 }
 
                 &.disabled {
                     &::after {
                         content: 'soon';
                         font-size: 14px;
-                        transform: rotateZ(20deg) translate(-20px, 5px);
+                        transform: rotateZ(20deg) translate(-20px, 10px);
                         color: var(--text);
                     }
 
@@ -91,12 +99,17 @@
                         cursor: default;
                     }
 
-                    color: rgb(128, 128, 128);
+                    filter: opacity(0.5);
                 }
 
-                display: flex;
+                .icon {
+                    margin-right: 10px;
+                }
+
                 font-weight: bold;
                 font-size: 22px;
+                display: flex;
+                flex-direction: row;
             }
         }
 

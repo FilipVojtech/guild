@@ -1,4 +1,5 @@
 <a href='https://github.com/FilipVojtech'>&copy; Filip Vojtěch</a>
+<a href='https://friconix.com/'>Icons by Friconix</a>
 
 <style lang='postcss'>
     a {
