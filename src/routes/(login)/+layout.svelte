@@ -2,7 +2,7 @@
 	import { loggedIn } from '../../stores';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import Copy from '../Copy.svelte';
+	import Copy from '$lib/Copy.svelte';
 	import Transition from '../Transition.svelte';
 	import { slide } from 'svelte/transition';
 

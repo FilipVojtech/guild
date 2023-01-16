@@ -1,5 +1,5 @@
 <script>
-	import Copy from '../Copy.svelte';
+	import Copy from '$lib/Copy.svelte';
 </script>
 
 	<img id='logo' src='logo.png' alt='GUILD logo'>

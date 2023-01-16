@@ -3,7 +3,7 @@
 	import About from './About.svelte';
 	import { goto } from '$app/navigation';
 	import AccountSwitcher from './AccountSwitcher.svelte';
-	import Copy from '../Copy.svelte';
+	import Copy from '$lib/Copy.svelte';
 
 	const paths: App.Paths = [
 		{ href: '/', title: 'Home', disabled: false },
