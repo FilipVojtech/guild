@@ -10,5 +10,6 @@ declare namespace App {
 		href: string
 		title: string
 		disabled: boolean
+		icon: string
 	}[]
 }
