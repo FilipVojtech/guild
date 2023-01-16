@@ -1,30 +1,32 @@
+<script lang='ts'>
+	import Icon from '$lib/Icon.svelte';
+</script>
+
 <div id='switcher'>
 	<div class='row' id='character'>
 		<div class='button' id='profile'>Niklas Eeroson</div>
-		<div class='button' id='options'>v</div>
+		<div class='button' id='options'>
+			<Icon icon='chevron-solid' direction='down' />
+		</div>
 	</div>
 	<hr>
-	<div class='button row' id='user'>Falcon</div>
+	<div class='row' id='user'>
+		<div class='button'>Falcon</div>
+	</div>
 </div>
 
 <style lang='postcss'>
-    .row {
-        #profile {
-            flex-grow: 1;
-        }
-
-        #options {
-            padding: 0 10px;
-        }
-
-        display: flex;
-        padding: 10px 5px;
-		font-weight: bold;
-    }
-
     #switcher {
         border-radius: 15px;
         border: 3px solid;
+    }
+
+    .row {
+        display: flex;
+        align-items: center;
+        padding: 0 5px;
+        font-weight: bold;
+        flex-grow: 1;
     }
 
     .button {
@@ -33,5 +35,14 @@
         }
 
         cursor: pointer;
+        padding: 10px 0;
+        flex-grow: 1;
+    }
+
+    #character {
+        #options {
+            flex: 0;
+            aspect-ratio: 1/1;
+        }
     }
 </style>
