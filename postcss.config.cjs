@@ -1,7 +1,9 @@
-const autoprefixer = require('autoprefixer');
-
 const config = {
-	plugins: [autoprefixer]
+	plugins: [
+		require('postcss-nested'),
+		require('autoprefixer'),
+		require('cssnano'),
+	],
 };
 
 module.exports = config;

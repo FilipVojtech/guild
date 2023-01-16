@@ -6,4 +6,9 @@ declare namespace App {
 	// interface PageData {}
 	// interface Error {}
 	// interface Platform {}
+	type Paths = {
+		href: string
+		title: string
+		disabled: boolean
+	}[]
 }

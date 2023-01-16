@@ -1,0 +1,99 @@
+/*** Fonts ***/
+@font-face {
+    font-family: 'aaargh';
+    src: url('fonts/Aaargh.ttf') ;
+}
+
+@font-face {
+    font-family: 'akashi';
+    src: url("fonts/akashi.ttf");
+}
+
+/*** CSS Resets ***/
+html {
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    font-size: inherit;
+}
+
+/* remove default spacing */
+/* force styling of type through styling, rather than elements */
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    color: var(--text);
+    font-family: 'aaargh', sans-serif;
+}
+
+/* dark mode user-agent-styles */
+html {
+    color-scheme: dark light;
+}
+
+/* min body height */
+body {
+//min-height: 100vh; min-width: 320px;
+    @media (prefers-color-scheme: dark) {
+        background-color: black;
+    }
+}
+
+/* responsive images/videos */
+img,
+picture,
+svg,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+
+    &:hover {
+        margin-bottom: -1px;
+        border-bottom: 1px dashed inherit;
+    }
+}
+
+h1 {
+    font-size: 38px;
+    font-family: 'akashi', sans-serif;
+}
+
+.noselect {
+    user-select: none;
+}
+
+/*** Variables ***/
+:root {
+    --theme: #9ed0f6;
+    --theme-border: #000;
+    --theme-light: #a1edfd;
+    --theme-background: #5e82bd;
+    --text: #0b113f;
+    @media (prefers-color-scheme: dark) {
+        --theme: #2974b0;
+        --theme-background: #182842;
+        --text: #e8e8ff;
+    }
+}
+
+/*** Nav ***/
+nav {
+    .active {
+        background-color: red;
+    }
+
+    a, a:active, a:hover, a:visited {
+        color: inherit;
+    }
+}

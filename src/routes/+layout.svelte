@@ -1,5 +1,6 @@
-<script lang="ts">
-	import '../app.postcss';
+<script lang='ts'>
+	import '../app.css';
+	import '../form.css';
 </script>
 
 <slot />
