@@ -73,13 +73,18 @@ h1 {
     user-select: none;
 }
 
+.interactive {
+    cursor: pointer;
+}
+
 /*** Variables ***/
 :root {
     --theme: #9ed0f6;
     --theme-border: #000;
-    --theme-light: #a1edfd;
-    --theme-background: #5e82bd;
+    --theme-light: #c4f5ff;
+    --theme-background: #7ca5e8; /*old: #5e82bd*/
     --text: #0b113f;
+    --text-on-bg: #e8e8ff;
     @media (prefers-color-scheme: dark) {
         --theme: #2974b0;
         --theme-background: #182842;

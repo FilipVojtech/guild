@@ -34,11 +34,7 @@ input {
             background: none;
             width: min-content;
             margin: auto;
-            color: var(--theme);
-        }
-
-        &.plain:hover {
-
+            color: var(--theme-light);
         }
 
         cursor: pointer;
