@@ -1,7 +1,20 @@
+<script>
+	import Post from '$lib/Post.svelte';
+</script>
+
 <svelte:head>
 	<title>GUILD Hall</title>
 </svelte:head>
 
-<!--<h1>Welcome to SvelteKit</h1>-->
-<!--<p>Visit <a href='https://kit.svelte.dev'>kit.svelte.dev</a> to read the documentation</p>-->
 <h1 id='title'>Home</h1>
+<div id='posts'>
+	{#each Array(10) as _}
+		<Post />
+	{/each}
+</div>
+
+<style>
+    #title {
+        margin-bottom: 20px;
+    }
+</style>
