@@ -70,7 +70,7 @@
     header {
         #logo {
             margin: 10px 0 20px;
-            height: 4rem;
+            height: 3.4rem;
         }
 
         nav {
