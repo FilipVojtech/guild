@@ -27,7 +27,7 @@
     flex-flow: column nowrap;
 }
 
-input {
+input, textarea {
     &[type=button], &[type=submit] {
         &.plain {
             border: none;
@@ -49,4 +49,8 @@ input {
     @media (prefers-color-scheme: dark) {
         border-color: rgb(80, 80, 80);
     }
+}
+
+textarea {
+    resize: none;
 }
