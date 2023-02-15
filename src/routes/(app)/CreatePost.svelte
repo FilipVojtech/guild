@@ -54,5 +54,6 @@
     .bubbles {
         margin-top: 15px;
         width: 17px;
+		align-self: flex-start;
     }
 </style>
