@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { enhance } from '$app/forms';
 	import Transition from '../../Transition.svelte';
-	import {slide} from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 
 	export let form: ActionData;
 </script>
