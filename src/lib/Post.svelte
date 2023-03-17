@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import Icon from '$lib/Icon.svelte';
 	import { onMount } from 'svelte';
-	import { scale, fade } from 'svelte/transition';
+	import { fade, scale } from 'svelte/transition';
 
 	export let author = {
 		character: {

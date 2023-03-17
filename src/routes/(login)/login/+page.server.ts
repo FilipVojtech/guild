@@ -3,8 +3,9 @@ import orm from '$lib/server/database';
 import User from '$lib/server/entities/User';
 import { fail, redirect } from '@sveltejs/kit';
 import { compare } from 'bcrypt';
-import { PEPPER, TOKEN_SECRET } from '$env/static/private';
-import * as jwt from 'jsonwebtoken';
+import { JWT_AUDIENCE, JWT_ISSUER, JWT_SECRET, PEPPER } from '$env/static/private';
+import * as jose from 'jose';
+import { createSecretKey } from 'crypto';
 
 export const actions: Actions = {
 	login: async ({ cookies, request }) => {
@@ -20,20 +21,30 @@ export const actions: Actions = {
 
 		// retrieve user from DB using login
 		const user = await em.findOne(User, { login: login.toString() });
+
 		if (!user || !(await compare(password + PEPPER, user.password))) {
 			return fail(400, { login, incorrect: true });
 		}
+
 		// create JWT token>
-		const userToken = {
+		const userData = {
 			displayName: user.displayName,
 			id: user.id,
 			login: user.login,
 		};
-		const fifteenMinutes = 15 * 60 * 1000;
-		const token = jwt.sign(userToken, TOKEN_SECRET, { expiresIn: fifteenMinutes });
+		const secret = createSecretKey(JWT_SECRET, 'utf-8');
+		const token = await new jose.SignJWT(userData)
+			.setProtectedHeader({ alg: 'HS256' })
+			.setIssuedAt()
+			.setIssuer(JWT_ISSUER)
+			.setAudience(JWT_AUDIENCE)
+			.setExpirationTime('15 minutes')
+			.sign(secret);
+
 		// send JWT token to frontend
 		const now = new Date();
-		const date = new Date(new Date().setMinutes(now.getMinutes() + fifteenMinutes));
+		/** Date fifteen minutes from now */
+		const date = new Date(new Date().setMinutes(now.getMinutes() + 15 * 60 * 1000));
 		cookies.set('token', token, { expires: date, sameSite: 'strict' });
 		throw redirect(303, '/');
 	},

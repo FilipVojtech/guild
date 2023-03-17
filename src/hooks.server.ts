@@ -1,8 +1,9 @@
 import type { Handle } from '@sveltejs/kit';
-import { verify } from 'jsonwebtoken';
-import { TOKEN_SECRET } from '$env/static/private';
+import * as jose from 'jose';
+import { JWT_SECRET } from '$env/static/private';
 import orm from '$lib/server/database';
 import User from '$lib/server/entities/User';
+import { createSecretKey } from 'crypto';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const { cookies } = event;
@@ -10,14 +11,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const em = orm.em.fork();
 
 	if (token) {
-		const jwtUser = verify(token, TOKEN_SECRET);
-		if (typeof jwtUser === 'string') {
-			throw new Error('Something went wrong');
-		}
+		const secret = createSecretKey(JWT_SECRET, 'utf-8');
+		const { payload, protectedHeader } = await jose.jwtVerify(token, secret);
 
-		let user: any;
+		let user;
 		try {
-			user = await em.findOne(User, { id: jwtUser.id });
+			user = await em.findOne(User, { id: payload.id! });
 		} catch (e) {
 			console.error(e);
 			return resolve(event);

@@ -1,4 +1,4 @@
-import { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD } from '$env/static/private';
+import { DB_HOST, DB_NAME, DB_PASSWORD, DB_USER } from '$env/static/private';
 import 'reflect-metadata';
 import { MikroORM } from '@mikro-orm/core';
 import Post from '$lib/server/entities/Post';

@@ -1,7 +1,6 @@
 import type { RequestHandler } from './$types';
 import orm from '$lib/server/database';
 import User from '$lib/server/entities/User';
-import { error } from '@sveltejs/kit';
 import { json } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async (): Promise<Response> => {
