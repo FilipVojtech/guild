@@ -5,7 +5,7 @@
 	export let icon: string;
 	export let shape: 'triangle' | 'equilateral' | 'circle' | 'square' | 'hexagon' | 'octagon' | 'none' = 'none';
 	export let thickness: 'thin' | 'normal' | 'wide' | 'none' = 'normal';
-	export let style: 'outline' | 'solid' | 'prohibited' | 'none' = 'solid';
+	export let iconStyle: 'outline' | 'solid' | 'prohibited' | 'none' = 'solid';
 	export let direction: 'up' | 'right' | 'down' | 'left' | 'none' = 'up';
 	export let effect: 'flip-h' | 'flip-v' | 'spin' | 'pulse' | 'none' = 'none';
 	export let size: 'tiny' | 'xs' |
@@ -20,6 +20,7 @@
 
 	onMount(() => {
 		if (browser) {
+			// noinspection TypeScriptUnresolvedFunction
 			friconix_update();
 		}
 	});
@@ -53,7 +54,7 @@
 	}
 
 	function getStyle() {
-		switch (style) {
+		switch (iconStyle) {
 			case 'outline':
 				return 'l';
 			case 'prohibited':

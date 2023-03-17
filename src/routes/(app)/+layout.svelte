@@ -1,52 +1,42 @@
 <script lang='ts'>
-	import { loggedIn } from '../../stores.js';
 	import About from './About.svelte';
-	import { goto } from '$app/navigation';
 	import AccountSwitcher from './AccountSwitcher.svelte';
 	import Copy from '$lib/Copy.svelte';
 	import Icon from '$lib/Icon.svelte';
+	import { getContext } from 'svelte';
 
 	const paths: App.Paths = [
-		{ href: '/', title: 'Home', disabled: false, icon: 'home' },
+		{ href: '/', title: 'Home', icon: 'home' },
 		{ href: '/sessions', title: 'Sessions', disabled: true, icon: 'gamepad' },
-		{ href: '/settings', title: 'Settings', disabled: false, icon: 'settings' },
+		{ href: '/settings', title: 'Settings', icon: 'settings' },
 	];
 
-	function logout() {
-		$loggedIn = false;
-		goto('.');
-	}
+	const user = getContext('user');
+	$: loggedIn = !!$user?.id
 </script>
 
 <svelte:head>
-	{#if !$loggedIn }
+	{#if !loggedIn }
 		<title>About GUILD</title>
 	{/if}
 </svelte:head>
 
-{#if $loggedIn}
+{#if loggedIn}
 	<div id='page'>
 		<header>
 			<div class='top'>
 				<img id='logo' src='logo.png' alt='GUILD logo'>
 				<nav>
 					{#each paths as { href, title, disabled, icon } (href)}
-						{#if !disabled}
-							<div class='nav-item'>
-								<a {href}><span class='icon'><Icon {icon} /></span> {title}</a>
-							</div>
-						{:else}
-							<div class='nav-item disabled'>
-								<a href=''><span class='icon'><Icon {icon} /></span> {title}</a>
-							</div>
-						{/if}
+						<div class='nav-item' class:disabled={disabled}>
+							<a href='{disabled ? "" : href}'><span class='icon'><Icon {icon} /></span> {title}</a>
+						</div>
 					{/each}
 				</nav>
 			</div>
 			<div class='bottom'>
 				<AccountSwitcher />
-				<div class='nav-item' on:click={logout}><a href='#'>Logout</a></div>
-				<br>
+				<div class='breaker'></div>
 				<Copy />
 			</div>
 		</header>
@@ -90,7 +80,7 @@
                 &.disabled {
                     &::after {
                         content: 'soon';
-                        font-size: 14px;
+                        font-size: 12px;
                         transform: rotateZ(20deg) translate(-20px, 10px);
                         color: var(--text);
                     }
@@ -104,12 +94,19 @@
 
                 .icon {
                     margin-right: 10px;
+                    font-size: initial;
                 }
 
                 font-weight: bold;
                 font-size: 22px;
                 display: flex;
                 flex-direction: row;
+            }
+        }
+
+        .bottom {
+            .breaker {
+                height: 0.7rem;
             }
         }
 

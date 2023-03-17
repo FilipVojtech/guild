@@ -1,6 +1,9 @@
-<script>
+<script lang='ts'>
 	import Post from '$lib/Post.svelte';
 	import CreatePost from './CreatePost.svelte';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
 </script>
 
 <svelte:head>
@@ -8,10 +11,10 @@
 </svelte:head>
 
 <h1 id='title'>Home</h1>
-<CreatePost/>
+<CreatePost />
 <div id='posts'>
-	{#each Array(10) as _}
-		<Post />
+	{#each data.posts as post}
+		<Post {...post} />
 	{/each}
 </div>
 

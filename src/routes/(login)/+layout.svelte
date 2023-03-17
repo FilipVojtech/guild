@@ -1,13 +1,11 @@
 <script lang='ts'>
-	import { loggedIn } from '../../stores';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import Copy from '$lib/Copy.svelte';
-	import Transition from '../Transition.svelte';
-	import { slide } from 'svelte/transition';
 
+	const user = getContext('user');
 	onMount(() => {
-		if ($loggedIn) {
+		if ($user.loggedIn) {
 			goto('/');
 		}
 	});
@@ -21,9 +19,7 @@
 	<!--<h1 id='logo'></h1>-->
 	<img id='logo' src='logo.png' alt='Guild logo'>
 	<div id='form'>
-		<Transition transition={slide}>
 			<slot />
-		</Transition>
 	</div>
 	<Copy />
 	<!-- Center the login section -->
