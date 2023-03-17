@@ -1,8 +1,12 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import type { UserConfig } from 'vite';
+import viteTs from 'vite-plugin-ts'
 
 const config: UserConfig = {
-	plugins: [sveltekit()]
+	plugins: [
+		viteTs(),
+		sveltekit()
+	]
 };
 
 export default config;

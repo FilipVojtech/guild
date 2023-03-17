@@ -9,8 +9,8 @@
 
 {#key url}
 	<div
-		in:transition|local={{ x:-5, duration, delay: duration }}
-		out:transition|local={{ x: 5, duration }}
+		in:transition={{ x:-5, duration }}
+		out:transition={{ x: 5, duration }}
 	>
 		<slot />
 	</div>

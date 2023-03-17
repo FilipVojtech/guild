@@ -1,12 +1,12 @@
 /*** Fonts ***/
 @font-face {
     font-family: 'aaargh';
-    src: url('fonts/Aaargh.ttf');
+    src: url('$lib/fonts/Aaargh.ttf');
 }
 
 @font-face {
     font-family: 'akashi';
-    src: url("fonts/akashi.ttf");
+    src: url("$lib/fonts/akashi.ttf");
 }
 
 /*** CSS Resets ***/
@@ -22,11 +22,11 @@ html {
     font-size: inherit;
 }
 
-/* remove default spacing */
-/* force styling of type through styling, rather than elements */
 * {
+    /* remove default spacing */
     margin: 0;
     padding: 0;
+    /* force styling of type through styling, rather than elements */
     font: inherit;
     color: var(--text);
     font-family: 'aaargh', sans-serif;
@@ -57,11 +57,6 @@ video {
 a {
     display: inline-block;
     text-decoration: none;
-
-    &:hover {
-        margin-bottom: -1px;
-        border-bottom: 1px dashed inherit;
-    }
 }
 
 h1 {
@@ -85,6 +80,8 @@ h1 {
     --theme-background: #7ca5e8; /*old: #5e82bd*/
     --text: #0b113f;
     --text-on-bg: #e8e8ff;
+    --success-background: #64c464;
+    --success-text: #003b00;
     @media (prefers-color-scheme: dark) {
         --theme: #2974b0;
         --theme-background: #182842;

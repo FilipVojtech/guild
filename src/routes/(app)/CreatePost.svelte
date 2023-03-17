@@ -39,7 +39,8 @@
             background-color: var(--theme-background);
             padding: 15px 10px 10px;
             border-radius: 15px;
-            font-size: 16px;
+            font-size: 15px;
+			line-height: 1.2;
         }
 
         display: flex;
