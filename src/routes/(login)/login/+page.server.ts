@@ -3,9 +3,8 @@ import orm from '$lib/server/database';
 import User from '$lib/server/entities/User';
 import { fail, redirect } from '@sveltejs/kit';
 import { compare } from 'bcrypt';
-import { JWT_AUDIENCE, JWT_ISSUER, JWT_SECRET, PEPPER } from '$env/static/private';
-import * as jose from 'jose';
-import { createSecretKey } from 'crypto';
+import { PEPPER } from '$env/static/private';
+import { createToken } from '$lib/server/JWTToken';
 
 export const actions: Actions = {
 	login: async ({ cookies, request }) => {
@@ -32,14 +31,9 @@ export const actions: Actions = {
 			id: user.id,
 			login: user.login,
 		};
-		const secret = createSecretKey(JWT_SECRET, 'utf-8');
-		const token = await new jose.SignJWT(userData)
-			.setProtectedHeader({ alg: 'HS256' })
-			.setIssuedAt()
-			.setIssuer(JWT_ISSUER)
-			.setAudience(JWT_AUDIENCE)
-			.setExpirationTime('15 minutes')
-			.sign(secret);
+		const token = await createToken(userData);
+		user.refreshToken = token;
+		em.flush();
 
 		// send JWT token to frontend
 		const now = new Date();

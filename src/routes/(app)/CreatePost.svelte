@@ -11,7 +11,7 @@
 	</div>
 	<div class='bubble'>
 		<h2 class='name'>Create post</h2>
-		<form method='post'>
+		<form method='post' action='?/createPost'>
 			<div class='input'>
 				<textarea name='postText' id='postText' rows='6' placeholder='Write something...'></textarea>
 			</div>

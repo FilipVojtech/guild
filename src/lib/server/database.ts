@@ -18,8 +18,8 @@ const orm = await MikroORM.init({
 	},
 });
 
-// const migrator = orm.getMigrator();
-// await migrator.createMigration();
-// await migrator.up();
+const migrator = orm.getMigrator();
+await migrator.createMigration();
+await migrator.up();
 
 export default orm;

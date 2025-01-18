@@ -1,8 +1,7 @@
 import type { Handle } from '@sveltejs/kit';
 import orm from '$lib/server/database';
 import User from '$lib/server/entities/User';
-import { verifyToken } from '$lib/server/JWTToken';
-import { refreshToken } from './lib/server/JWTToken';
+import { refreshToken, verifyToken } from '$lib/server/JWTToken';
 import type { JWTPayload } from 'jose';
 
 export const handle: Handle = async ({ event, resolve }) => {
@@ -17,6 +16,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (!payload) {
 		let refreshedToken = await refreshToken(cookieToken);
 		if (!refreshedToken) {
+			event.cookies.delete('token');
 			return resolve(event);
 		} else {
 			payload = await verifyToken(refreshedToken);

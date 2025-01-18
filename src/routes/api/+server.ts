@@ -1,26 +1,21 @@
 import type { RequestHandler } from './$types';
 import orm from '$lib/server/database';
 import User from '$lib/server/entities/User';
-import { json } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
+import * as bcrypt from 'bcrypt';
+import { PEPPER } from '$env/static/private';
 
 export const GET: RequestHandler = async (): Promise<Response> => {
+	const em = orm.em.fork();
+	em.findOne(User, { displayName: 'Falcon' });
 	return new Response('Hello Falcon!');
 };
 
 // Creating a user
-// export const POST: RequestHandler = async ({ request }) => {
-// 	const data = await request.json();
-//
-// 	if (!data.login || !data.displayName)
-// 		throw error(400, "Request must contain 'login' and 'displayName' fields.");
-//
-// 	const em = orm.em.fork();
-// 	const user = new User(data.login, data.displayName);
-// 	await em.persistAndFlush(user);
-// 	return new Response(null, { status: 200 });
-// };
-
-export const POST: RequestHandler = async (): Promise<Response> => {
+export const POST: RequestHandler = async ({ request }) => {
 	const em = orm.em.fork();
-	return json(await em.findOne(User, { login: 'FilipVojtech' }));
+	const user = new User('Filip', 'Falcon');
+	user.password = await bcrypt.hash('Heslo' + PEPPER, 10);
+	await em.persistAndFlush(user);
+	return new Response(null, { status: 200 });
 };

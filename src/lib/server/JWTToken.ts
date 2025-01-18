@@ -51,7 +51,10 @@ export async function verifyToken(token: string): Promise<JWTPayload | null> {
 	const secret = createSecretKey(JWT_SECRET, 'utf-8');
 
 	try {
-		let verifyToken = await jose.jwtVerify(token, secret);
+		let verifyToken = await jose.jwtVerify(token, secret, {
+			issuer: JWT_ISSUER,
+			audience: JWT_AUDIENCE,
+		});
 		return verifyToken.payload;
 	} catch {
 		return null;

@@ -86,6 +86,8 @@
                 border-radius: 5px;
             }
 
+			margin-top: -7px;
+			font-size: 14px;
             user-select: none;
         }
 
